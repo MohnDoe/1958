@@ -1,0 +1,117 @@
+
+
+
+Options +FollowSymlinks
+RewriteEngine On
+
+# uncomment for up to server
+###############################################
+#RewriteBase /
+#AuthName "Developpement en cours, lol !"
+#AuthType Basic
+#AuthUserFile "/kunden/homepages/45/d399347765/htdocs/dev1958/.htpasswd"
+#Require valid-user
+##########################################
+
+
+#game avec slug
+RewriteRule ^populaires$ index.php?typegameswall=pop [L]
+
+#HOME
+RewriteRule ^news$ index.php?superpage=news [L]
+RewriteRule ^prochainement$ index.php?typegameswall=soon [L]
+RewriteRule ^random$ index.php?typegameswall=random [L]
+
+#PROFIL
+RewriteRule ^@([a-zA-Z0-9-_\.]+)$ index.php?username=$1 [L]
+
+#JEU
+RewriteRule ^game/([a-zA-Z0-9-_\.]+)-([0-9]+)$ index.php?idGame=$2&slugGame=$1 [L]
+RewriteRule ^game/([a-zA-Z0-9-_\.]+)-([0-9]+)/edit$ index.php?idGame=$2&slugGame=$1&actionGame=edit [L]
+RewriteRule ^game/([a-zA-Z0-9-_\.]+)-([0-9]+)/([a-zA-Z0-9-_\.]+)$ index.php?idGame=$2&slugGame=$1&viewGame=$3 [L]
+
+#BADGE
+RewriteRule ^badge/([0-9]+)$ index.php?idBadge=$1 [L]
+RewriteRule ^badge/([0-9]+)/([0-9]+)$ index.php?idBadge=$1&idUserBadge=$2 [L]
+
+
+
+#REVIEW
+RewriteRule ^review/([a-zA-Z0-9-_\.]+)-([0-9]+)/([0-9]+)$ index.php?idGameCrt=$2&slugGameCrt=$1&idCrt=$3 [L]
+#CREATION REVIEW
+RewriteRule ^review/([a-zA-Z0-9-_\.]+)-([0-9]+)/create$ index.php?idGameCrt=$2&slugGameCrt=$1&action=createcrt [L]
+
+#LISTE
+RewriteRule ^list/([a-zA-Z0-9-_\.]+)-([0-9]+)$ index.php?slugList=$1&idList=$2 [L]
+
+#MICRO-CRITIQUE
+RewriteRule ^micro-review/([0-9]+)$ index.php?idMccrt=$1 [L]
+RewriteRule ^micro-review/([a-zA-Z0-9-_\.]+)-([0-9]+)/([0-9]+)$ index.php?idMccrt=$3 [L]
+#CREATION MICROREVIEW
+RewriteRule ^micro-review/([a-zA-Z0-9-_\.]+)-([0-9]+)/create$ index.php?idGameMccrt=$2&slugGameMccrt=$1&action=createmccrt [L]
+
+#RECHERCHE
+RewriteRule ^search/developers$ view/page.search.php?typeSearch=developers [L]
+RewriteRule ^search/editors$ view/page.search.php?typeSearch=editors [L]
+
+#SETTINGS USER
+RewriteRule ^me/settings$ index.php?superpage=settings [L]
+
+
+
+#HTML RETURN AND CALL AJAX
+
+#NOTIFICATIONS
+#GLOBAL
+RewriteRule ^global_notifications_inbox/([0-9]+)$ view/_mod.topbar.notifications-container.php?type_notification=global&page=$1 [L]
+RewriteRule ^global_notifications_inbox$ view/_mod.topbar.notifications-container.php?type_notification=global [L]
+#FOLLOWINGS
+RewriteRule ^followings_notifications_inbox/([0-9]+)$ view/_mod.topbar.notifications-container.php?type_notification=followings&page=$1 [L]
+RewriteRule ^followings_notifications_inbox$ view/_mod.topbar.notifications-container.php?type_notification=followings [L]
+
+#COMMENTAIRE HTML
+RewriteRule ^comments$ view/_mod.all.commentaires.php [L]
+#POST COMMENTAIRE
+RewriteRule ^comments/([a-zA-Z0-9-_\.]+)/([0-9]+)/([0-9]+)$ view/_mod.all.commentaires.php?typeThing=$1&idThing=$2&page=$3 [L]
+
+#RATE GAME
+RewriteRule ^note/game/([0-9]+)$ view/_mod.game.notes.php?idGameNote=$1 [L]
+
+#HAVE GAME
+RewriteRule ^games/([0-9]+)/have$ calls/have.php?idGame=$1 [L]
+
+#WANT GAME
+RewriteRule ^games/([0-9]+)/want$ calls/want.php?idGame=$1 [L]
+
+#RECOMAND GAME
+RewriteRule ^games/([0-9]+)/pyong$ calls/pyong.php?idGame=$1 [L]
+#RECOMMAND REVIEW
+RewriteRule ^reviews/([0-9]+)/pyong$ calls/pyong.php?idCrt=$1 [L]
+#RECOMAND MICROREVIEW
+RewriteRule ^microreviews/([0-9]+)/pyong$ calls/pyong.php?idMccrt=$1 [L]
+#RECOMAND LIST
+RewriteRule ^lists/([0-9]+)/pyong$ calls/pyong.php?idList=$1 [L]
+
+RewriteRule ^users/([0-9]+)/follows$ calls/follows.php?idUser=$1 [L]
+
+#LIKE GAME
+RewriteRule ^games/([0-9]+)/like$ calls/appreciations.php?idGame=$1&action_appr=like [L]
+#LIKE REVIEW
+RewriteRule ^reviews/([0-9]+)/like$ calls/appreciations.php?idCrt=$1&action_appr=like [L]
+#LIKE MICROREVIEW
+RewriteRule ^microreviews/([0-9]+)/like$ calls/appreciations.php?idMccrt=$1&action_appr=like [L]
+#LIKE LIST
+RewriteRule ^lists/([0-9]+)/like$ calls/appreciations.php?idList=$1&action_appr=like [L]
+
+#DISLIKE GAME
+RewriteRule ^games/([0-9]+)/dislike$ calls/appreciations.php?idGame=$1&action_appr=dislike [L]
+#DISLIKE REVIEW
+RewriteRule ^reviews/([0-9]+)/dislike$ calls/appreciations.php?idCrt=$1&action_appr=dislike [L]
+#DISLIKE MICROREVIEW
+RewriteRule ^microreviews/([0-9]+)/dislike$ calls/appreciations.php?idMccrt=$1&action_appr=dislike [L]
+#DISLIKE LIST
+RewriteRule ^lists/([0-9]+)/dislike$ calls/appreciations.php?idList=$1&action_appr=dislike [L]
+
+#AJAX POST REVIEW & MICROREVIEW
+RewriteRule ^review/([a-zA-Z0-9-_\.]+)-([0-9]+)/create/post$ calls/post_critique.php?idGameCrt=$2&action=post [L]
+RewriteRule ^micro-review/([a-zA-Z0-9-_\.]+)-([0-9]+)/create/post$ calls/post_microcritique.php?idGameMccrt=$2&action=post [L]
