@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - db1958@localhost" uuid="1480f985-49a7-4ce3-b9ab-309ecf673c14">
+    <database-info product="MySQL" version="5.5.24-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="db1958"/>
+    <table name="appreciations" schema="" catalog="db1958" type="TABLE">
+      <column name="idAppr" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idUserAppr" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idListAppr" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="idCritiqueAppr" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="idMccrtAppr" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="idJeuAppr" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="typeAppr" sqlType="VARCHAR" precision="1" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idAppr"/>
+      <foreign-key name="FK_appreciations" columns="idUserAppr" ref-table="users" ref-schema="" ref-catalog="db1958" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_appreciations2" columns="idListAppr" ref-table="listsgames" ref-schema="" ref-catalog="db1958" ref-columns="idList" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_appreciations3" columns="idCritiqueAppr" ref-table="critiques" ref-schema="" ref-catalog="db1958" ref-columns="idCritique" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_appreciations4" columns="idMccrtAppr" ref-table="micros_critiques" ref-schema="" ref-catalog="db1958" ref-columns="idMccrt" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_appreciations5" columns="idJeuAppr" ref-table="jeux" ref-schema="" ref-catalog="db1958" ref-columns="idJeu" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_appreciations" unique="false" columns="idUserAppr"/>
+      <index name="FK_appreciations2" unique="false" columns="idListAppr"/>
+      <index name="FK_appreciations3" unique="false" columns="idCritiqueAppr"/>
+      <index name="FK_appreciations4" unique="false" columns="idMccrtAppr"/>
+      <index name="FK_appreciations5" unique="false" columns="idJeuAppr"/>
+    </table>
+    <table name="badges" schema="" catalog="db1958" type="TABLE">
+      <column name="idBadge" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nomBadge" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="descriptionBadge" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="objectifBadge" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="urlImgBadge" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="typeBadge" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="secret" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="codeBadge" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="serieBadge" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idBadge"/>
+      <exported-key name="FK_HaveBadge" table="havebadge" schema="" catalog="db1958" columns="idBadgeHaveBadge"/>
+      <exported-key name="FK_HaveBadgeNotif" table="notifications" schema="" catalog="db1958" columns="idBadgeNotification"/>
+      <exported-key name="FK_transactions3" table="transactions" schema="" catalog="db1958" columns="idBadgeTransaction"/>
+      <index name="codeBadge" unique="true" columns="codeBadge"/>
+    </table>
+    <table name="commentaires" schema="" catalog="db1958" type="TABLE">
+      <column name="idCommentaire" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idUserCommentaire" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idGameCommentaire" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="LTE="/>
+      <column name="idCritiqueCommentaire" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="LTE="/>
+      <column name="idListeCommentaire" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="LTE="/>
+      <column name="idMicroCritiqueCommentaire" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="LTE="/>
+      <column name="contenueCommentaire" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="dateCommentaire" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="idCommentaire"/>
+      <foreign-key name="FK_PostCommentaire" columns="idUserCommentaire" ref-table="users" ref-schema="" ref-catalog="db1958" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_transactions2" table="transactions" schema="" catalog="db1958" columns="idCommentaireTransaction"/>
+      <index name="FK_HaveCommentaire" unique="false" columns="idCritiqueCommentaire"/>
+      <index name="FK_PostCommentaire" unique="false" columns="idUserCommentaire"/>
+    </table>
+    <table name="critiques" schema="" catalog="db1958" type="TABLE">
+      <column name="idCritique" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idJeuCritique" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idUserCritique" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="titreCritique" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="noteGameplayCritique" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="noteGraphismCritique" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="noteBOCritique" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="noteStoryCritique" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="noteLifetimeCritique" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="noteMoyenneCritique" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="contenueCritique" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="dateCritique" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="viewsCritique" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="populariteCritique" sqlType="FLOAT" precision="20" scale="10" nullable="false" jdbcType="7"/>
+      <column name="nbWordsCritique" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idCritique"/>
+      <foreign-key name="FK_HaveCritique" columns="idJeuCritique" ref-table="jeux" ref-schema="" ref-catalog="db1958" ref-columns="idJeu" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_PostCritique" columns="idUserCritique" ref-table="users" ref-schema="" ref-catalog="db1958" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_appreciations3" table="appreciations" schema="" catalog="db1958" columns="idCritiqueAppr"/>
+      <exported-key name="FK_transactions5" table="transactions" schema="" catalog="db1958" columns="idCritiqueTransaction"/>
+      <index name="FK_HaveCritique" unique="false" columns="idJeuCritique"/>
+      <index name="FK_PostCritique" unique="false" columns="idUserCritique"/>
+    </table>
+    <table name="developers" schema="" catalog="db1958" type="TABLE">
+      <column name="idDev" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nomDev" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="descrDev" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="dateCreaDev" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="urlSiteDev" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="viewDev" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="populariteDev" sqlType="DECIMAL" precision="10" scale="0" nullable="false" jdbcType="3"/>
+      <primary-key name="PRIMARY" columns="idDev"/>
+      <exported-key name="FK_isDevelopedBy" table="jeux" schema="" catalog="db1958" columns="idDevJeu"/>
+    </table>
+    <table name="editors" schema="" catalog="db1958" type="TABLE">
+      <column name="idEdit" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nomEdit" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="descrEdit" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="dateCreaEdit" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="urlSiteEdit" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="viewEdit" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="populariteEdit" sqlType="DECIMAL" precision="10" scale="0" nullable="false" jdbcType="3"/>
+      <primary-key name="PRIMARY" columns="idEdit"/>
+      <exported-key name="FK_isEditedBy" table="jeux" schema="" catalog="db1958" columns="idEditJeu"/>
+    </table>
+    <table name="emailsrequest" schema="" catalog="db1958" type="TABLE">
+      <column name="idReq" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="emailReq" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="validTkReq" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" remarks="VG9rZW4gZGUgdmFsaWRhdGlvbg=="/>
+      <column name="cleReq" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="dateReq" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="ipReq" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="browserReq" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="validateEmailReq" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="validateTimeReq" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="invitationKey" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="sentInvitationReq" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <primary-key name="PRIMARY" columns="idReq"/>
+      <index name="emailReq" unique="true" columns="emailReq"/>
+    </table>
+    <table name="followings" schema="" catalog="db1958" type="TABLE">
+      <column name="idFL" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idUserWhoFollowFL" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="SWQgbGUgbCd1dGlsaXNhdGV1ciBxdWkgZm9sbG93"/>
+      <column name="idUserToFollowFL" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="SUQgZGUgbCd1c2VyIHN1aXZpcw=="/>
+      <column name="dateFollowFL" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="idFL"/>
+    </table>
+    <table name="gamemash_scores" schema="" catalog="db1958" type="TABLE">
+      <column name="idGameScoreGM" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="scoreGM" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idGameScoreGM"/>
+    </table>
+    <table name="gamemash_votes" schema="" catalog="db1958" type="TABLE">
+      <column name="idVoteGM" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idGameOneGM" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idGameTwoGM" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idUserVoteGM" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="datetimeVoteGM" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="typeVote" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" remarks="MTogdm90ZTsgMDogYXVjdW4gZGVzIGRldXg="/>
+      <column name="idWhoWinGM" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="SUQgZHUgamV1eCBxdWkgZ2FnbmU="/>
+      <column name="idWhoLoseGM" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="SUQgZHUgamV1eCBxdWkgcGVyZA=="/>
+      <column name="gIDvoteGM" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idVoteGM"/>
+    </table>
+    <table name="havebadge" schema="" catalog="db1958" type="TABLE">
+      <column name="idHaveBadge" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idBadgeHaveBadge" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idUserHaveBadge" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="dateOptentionBadge" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="codeBadgeHaveBadge" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idHaveBadge"/>
+      <foreign-key name="FK_HaveBadge" columns="idBadgeHaveBadge" ref-table="badges" ref-schema="" ref-catalog="db1958" ref-columns="idBadge" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_HaveBadge2" columns="idUserHaveBadge" ref-table="users" ref-schema="" ref-catalog="db1958" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_HaveBadge" unique="false" columns="idBadgeHaveBadge"/>
+      <index name="FK_HaveBadge2" unique="false" columns="idUserHaveBadge"/>
+    </table>
+    <table name="havegame" schema="" catalog="db1958" type="TABLE">
+      <column name="idHaveGame" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idUserHaveGame" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idJeuHaveGame" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idHaveGame"/>
+      <foreign-key name="FK_HaveGame" columns="IDUSERHAVEGAME" ref-table="users" ref-schema="" ref-catalog="db1958" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_HaveGame2" columns="IDJEUHAVEGAME" ref-table="jeux" ref-schema="" ref-catalog="db1958" ref-columns="idJeu" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_HaveGame" unique="false" columns="idUserHaveGame"/>
+      <index name="FK_HaveGame2" unique="false" columns="idJeuHaveGame"/>
+    </table>
+    <table name="imagesjeu" schema="" catalog="db1958" type="TABLE">
+      <column name="idImg" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idJeu" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="typeImg" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5"/>
+      <primary-key name="PRIMARY" columns="idImg"/>
+      <foreign-key name="FK_HaveImg" columns="idJeu" ref-table="jeux" ref-schema="" ref-catalog="db1958" ref-columns="idJeu" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_HaveImg" unique="false" columns="idJeu"/>
+    </table>
+    <table name="isinlist" schema="" catalog="db1958" type="TABLE">
+      <column name="IdInList" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idList" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idJeuInList" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="infosInList" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="dateAjoutInList" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="IdInList"/>
+      <foreign-key name="FK_isInList" columns="idList" ref-table="listsgames" ref-schema="" ref-catalog="db1958" ref-columns="idList" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_isInList2" columns="IDJEUINLIST" ref-table="jeux" ref-schema="" ref-catalog="db1958" ref-columns="idJeu" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_isInList" unique="false" columns="idList"/>
+      <index name="FK_isInList2" unique="false" columns="idJeuInList"/>
+    </table>
+    <table name="iswaiting" schema="" catalog="db1958" type="TABLE">
+      <column name="idIsWaiting" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idUserIsWaiting" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idJeuIsWaiting" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idIsWaiting"/>
+      <foreign-key name="FK_isWaiting" columns="idUserIsWaiting" ref-table="users" ref-schema="" ref-catalog="db1958" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_isWaiting2" columns="idJeuIsWaiting" ref-table="jeux" ref-schema="" ref-catalog="db1958" ref-columns="idJeu" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_isWaiting" unique="false" columns="idUserIsWaiting"/>
+      <index name="FK_isWaiting2" unique="false" columns="idJeuIsWaiting"/>
+    </table>
+    <table name="jeux" schema="" catalog="db1958" type="TABLE">
+      <column name="idJeu" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idDevJeu" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idPlatform" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idEditJeu" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="nomJeu" sqlType="VARCHAR" precision="256" scale="0" nullable="false" jdbcType="12"/>
+      <column name="slugJeu" sqlType="VARCHAR" precision="140" scale="0" nullable="false" jdbcType="12"/>
+      <column name="synopsisJeu" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="releaseDateJeu" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="classificationJeu" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="urlPochetteJeu" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="urlBandeAnnonceJeu" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="genreJeu" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="viewsJeu" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="populariteJeu" sqlType="FLOAT" precision="20" scale="10" nullable="false" jdbcType="7" def="MC4wMDAwMDAwMDAw"/>
+      <column name="dateBeginFeaturedJeu" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91" def="JzAwMDAtMDAtMDAn"/>
+      <column name="dateEndFeaturedJeu" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91" def="JzAwMDAtMDAtMDAn"/>
+      <primary-key name="PRIMARY" columns="idJeu"/>
+      <foreign-key name="FK_havePlatform" columns="idPlatform" ref-table="platforms" ref-schema="" ref-catalog="db1958" ref-columns="idPlatform" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_isDevelopedBy" columns="idDevJeu" ref-table="developers" ref-schema="" ref-catalog="db1958" ref-columns="idDev" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_isEditedBy" columns="idEditJeu" ref-table="editors" ref-schema="" ref-catalog="db1958" ref-columns="idEdit" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_appreciations5" table="appreciations" schema="" catalog="db1958" columns="idJeuAppr"/>
+      <exported-key name="FK_HaveCritique" table="critiques" schema="" catalog="db1958" columns="idJeuCritique"/>
+      <exported-key name="FK_HaveGame2" table="havegame" schema="" catalog="db1958" columns="IDJEUHAVEGAME"/>
+      <exported-key name="FK_HaveImg" table="imagesjeu" schema="" catalog="db1958" columns="idJeu"/>
+      <exported-key name="FK_isInList2" table="isinlist" schema="" catalog="db1958" columns="IDJEUINLIST"/>
+      <exported-key name="FK_isWaiting2" table="iswaiting" schema="" catalog="db1958" columns="idJeuIsWaiting"/>
+      <exported-key name="FK_HaveMccrt" table="micros_critiques" schema="" catalog="db1958" columns="idJeuMccrt"/>
+      <index name="FK_havePlatform" unique="false" columns="idPlatform"/>
+      <index name="FK_isDevelopedBy" unique="false" columns="idDevJeu"/>
+      <index name="FK_isEditedBy" unique="false" columns="idEditJeu"/>
+    </table>
+    <table name="listsgames" schema="" catalog="db1958" type="TABLE">
+      <column name="idList" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idUserList" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="nomList" sqlType="VARCHAR" precision="140" scale="0" nullable="true" jdbcType="12"/>
+      <column name="descriptionList" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="dateCreaList" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="dateLastModList" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="viewsList" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="populariteList" sqlType="FLOAT" precision="20" scale="10" nullable="false" jdbcType="7" def="MC4wMDAwMDAwMDAw"/>
+      <primary-key name="PRIMARY" columns="idList"/>
+      <foreign-key name="FK_creatList" columns="idUserList" ref-table="users" ref-schema="" ref-catalog="db1958" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_appreciations2" table="appreciations" schema="" catalog="db1958" columns="idListAppr"/>
+      <exported-key name="FK_isInList" table="isinlist" schema="" catalog="db1958" columns="idList"/>
+      <index name="FK_creatList" unique="false" columns="idUserList"/>
+    </table>
+    <table name="micros_critiques" schema="" catalog="db1958" type="TABLE">
+      <column name="idMccrt" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idJeuMccrt" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idUserMccrt" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="contenueMccrt" sqlType="VARCHAR" precision="140" scale="0" nullable="false" jdbcType="12"/>
+      <column name="dateMccrt" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="nbWordsMccrt" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="populariteMccrt" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="viewsMccrt" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="idMccrt"/>
+      <foreign-key name="FK_HaveMccrt" columns="idJeuMccrt" ref-table="jeux" ref-schema="" ref-catalog="db1958" ref-columns="idJeu" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_PostMccrt" columns="idUserMccrt" ref-table="users" ref-schema="" ref-catalog="db1958" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_appreciations4" table="appreciations" schema="" catalog="db1958" columns="idMccrtAppr"/>
+      <exported-key name="FK_transactions4" table="transactions" schema="" catalog="db1958" columns="idMccrtTransaction"/>
+      <index name="FK_HaveMccrt" unique="false" columns="idJeuMccrt"/>
+      <index name="FK_PostMccrt" unique="false" columns="idUserMccrt"/>
+    </table>
+    <table name="missingcover" schema="" catalog="db1958" type="TABLE">
+      <column name="idMC" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="dateLastMissingMC" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="idJeuMC" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="nbMissingTimesMC" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MQ=="/>
+      <column name="haveTryMC" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <primary-key name="PRIMARY" columns="idMC"/>
+    </table>
+    <table name="notes_game" schema="" catalog="db1958" type="TABLE">
+      <column name="idNote" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="dateNote" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="idGameNote" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="gameplayNote" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="graphismNote" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="boNote" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="lifetimeNote" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="storyNote" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="totalNote" sqlType="FLOAT" precision="12" scale="0" nullable="false" jdbcType="7" def="MA=="/>
+      <column name="idUserNote" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="LTE="/>
+      <primary-key name="PRIMARY" columns="idNote"/>
+    </table>
+    <table name="notifications" schema="" catalog="db1958" type="TABLE">
+      <column name="idNotification" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idUserNotification" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idBadgeNotification" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="dateNotification" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="viewedNotification" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="typeNotification" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="infoNotification" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idNotification"/>
+      <foreign-key name="FK_HaveBadgeNotif" columns="idBadgeNotification" ref-table="badges" ref-schema="" ref-catalog="db1958" ref-columns="idBadge" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_Notifier" columns="idUserNotification" ref-table="users" ref-schema="" ref-catalog="db1958" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_HaveBadgeNotif" unique="false" columns="idBadgeNotification"/>
+      <index name="FK_Notifier" unique="false" columns="idUserNotification"/>
+    </table>
+    <table name="platforms" schema="" catalog="db1958" type="TABLE">
+      <column name="idPlatform" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nomPlatform" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="datePlatform" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="urlPlatform" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="aliasPlatform" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="toShowPlatform" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="idPlatform"/>
+      <exported-key name="FK_havePlatform" table="jeux" schema="" catalog="db1958" columns="idPlatform"/>
+    </table>
+    <table name="pyongs" schema="" catalog="db1958" type="TABLE">
+      <column name="idPyong" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idUserPyong" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="typePyong" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idThingPyong" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="usersGettingPyongedPyong" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="listUsersGettingPyongedPyong" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="datePyong" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="idPyong"/>
+    </table>
+    <table name="ranks" schema="" catalog="db1958" type="TABLE">
+      <column name="idRank" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nomRank" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="descriptionRank" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="privilegeRank" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idRank"/>
+      <exported-key name="FK_isRanked" table="users" schema="" catalog="db1958" columns="idRankUser"/>
+    </table>
+    <table name="recoverykeys" schema="" catalog="db1958" type="TABLE">
+      <column name="idRecoveryKey" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="recoveryKey" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idUserRecoveryKey" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="dateRecoveryKey" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="idRecoveryKey"/>
+    </table>
+    <table name="suggesionsgames" schema="" catalog="db1958" type="TABLE">
+      <column name="idSuggest" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idGame" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="LTE="/>
+      <column name="typeSuggest" sqlType="VARCHAR" precision="5" scale="0" nullable="false" jdbcType="12"/>
+      <column name="titleGameSuggest" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="idDevSuggest" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="idEditorSuggest" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="descriptionSuggest" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="urlTrailerSuggest" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="idGenreSuggest" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="LTE="/>
+      <column name="dateReleaseSuggest" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12" def="JzAwLTAwLTAwMDAn"/>
+      <column name="idUserSuggest" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="dateSuggest" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="statutSuggest" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="idSuggest"/>
+    </table>
+    <table name="transactions" schema="" catalog="db1958" type="TABLE">
+      <column name="idTransaction" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idUserTransaction" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idJeuTransaction" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="idCommentaireTransaction" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="idBadgeTransaction" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="idMccrtTransaction" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="idCritiqueTransaction" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="idListTransaction" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="idNoteTransaction" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="dateTransaction" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="ptsTransaction" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="actionTransaction" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="typeTransaction" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idTransaction"/>
+      <foreign-key name="FK_transactions2" columns="idCommentaireTransaction" ref-table="commentaires" ref-schema="" ref-catalog="db1958" ref-columns="idCommentaire" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_transactions3" columns="idBadgeTransaction" ref-table="badges" ref-schema="" ref-catalog="db1958" ref-columns="idBadge" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_transactions4" columns="idMccrtTransaction" ref-table="micros_critiques" ref-schema="" ref-catalog="db1958" ref-columns="idMccrt" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_transactions5" columns="idCritiqueTransaction" ref-table="critiques" ref-schema="" ref-catalog="db1958" ref-columns="idCritique" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_transactions" unique="false" columns="idJeuTransaction"/>
+      <index name="FK_transactions2" unique="false" columns="idCommentaireTransaction"/>
+      <index name="FK_transactions3" unique="false" columns="idBadgeTransaction"/>
+      <index name="FK_transactions4" unique="false" columns="idMccrtTransaction"/>
+      <index name="FK_transactions5" unique="false" columns="idCritiqueTransaction"/>
+    </table>
+    <table name="users" schema="" catalog="db1958" type="TABLE">
+      <column name="idUser" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idRankUser" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="LTE="/>
+      <column name="displayNameUser" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="nickUser" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="emailUser" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="urlPPUser" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="newsletterSubUser" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5"/>
+      <column name="birthdayUser" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="lastCoUser" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="ipUser" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="passUser" sqlType="VARCHAR" precision="256" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cleUser" sqlType="VARCHAR" precision="256" scale="0" nullable="false" jdbcType="12"/>
+      <column name="dateInscrUser" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="facebookUser" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="twitterUser" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="steamUser" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="siteUser" sqlType="VARCHAR" precision="256" scale="0" nullable="true" jdbcType="12"/>
+      <column name="bioUser" sqlType="VARCHAR" precision="140" scale="0" nullable="true" jdbcType="12"/>
+      <column name="platformsUser" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1" remarks="UGxhdGZvcm1zIEpTT04="/>
+      <column name="locationUser" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idBadgeProfilUser" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="LTE="/>
+      <column name="ptsUser" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="saltUser" sqlType="VARCHAR" precision="128" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idMccrtProfilUser" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idUser"/>
+      <foreign-key name="FK_isRanked" columns="idRankUser" ref-table="ranks" ref-schema="" ref-catalog="db1958" ref-columns="idRank" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_appreciations" table="appreciations" schema="" catalog="db1958" columns="idUserAppr"/>
+      <exported-key name="FK_PostCommentaire" table="commentaires" schema="" catalog="db1958" columns="idUserCommentaire"/>
+      <exported-key name="FK_PostCritique" table="critiques" schema="" catalog="db1958" columns="idUserCritique"/>
+      <exported-key name="FK_HaveBadge2" table="havebadge" schema="" catalog="db1958" columns="idUserHaveBadge"/>
+      <exported-key name="FK_HaveGame" table="havegame" schema="" catalog="db1958" columns="IDUSERHAVEGAME"/>
+      <exported-key name="FK_isWaiting" table="iswaiting" schema="" catalog="db1958" columns="idUserIsWaiting"/>
+      <exported-key name="FK_creatList" table="listsgames" schema="" catalog="db1958" columns="idUserList"/>
+      <exported-key name="FK_PostMccrt" table="micros_critiques" schema="" catalog="db1958" columns="idUserMccrt"/>
+      <exported-key name="FK_Notifier" table="notifications" schema="" catalog="db1958" columns="idUserNotification"/>
+      <index name="FK_isRanked" unique="false" columns="idRankUser"/>
+    </table>
+    <table name="wanttoplay" schema="" catalog="db1958" type="TABLE">
+      <column name="idWantPlay" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idUserWantPlay" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idJeuWantPlay" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idWantPlay"/>
+    </table>
+  </data-source>
+</component>
